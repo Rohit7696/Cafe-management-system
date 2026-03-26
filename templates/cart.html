@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}Your Cart | Luxe Cafe{% endblock %}
+
+{% block content %}
+<section class="container" style="margin-top: 5rem; min-height: 70vh;">
+    <div class="section-title">
+        <h2>Your Shopping Bag</h2>
+        <p>Review your selection before checkout.</p>
+    </div>
+
+    <div id="cart-container" style="max-width: 800px; margin: 0 auto;">
+        <!-- Cart items will be injected here by JS -->
+        <div id="cart-items"></div>
+
+        <div id="cart-summary" style="margin-top: 3rem; border-top: var(--border); padding-top: 2rem; display: none;">
+            <div
+                style="display: flex; justify-content: space-between; font-size: 1.5rem; font-weight: 700; margin-bottom: 2rem;">
+                <span>Total</span>
+                <span id="cart-total-price">₹0.00</span>
+            </div>
+            <a href="/checkout" class="cta-button" style="width: 100%; text-align: center;">Proceed to Checkout</a>
+        </div>
+
+        <div id="empty-cart" style="text-align: center; padding: 3rem; display: none;">
+            <i class="fas fa-shopping-bag"
+                style="font-size: 4rem; color: var(--text-secondary); margin-bottom: 1.5rem;"></i>
+            <h3>Your cart is empty</h3>
+            <p style="margin-bottom: 2rem; color: var(--text-secondary);">Looks like you haven't added any coffee yet.
+            </p>
+            <a href="/menu" class="cta-button">Go to Menu</a>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const itemsContainer = document.getElementById('cart-items');
+        const summary = document.getElementById('cart-summary');
+        const emptyMsg = document.getElementById('empty-cart');
+        const totalPrice = document.getElementById('cart-total-price');
+
+        const cart = window.cartManager.getCart();
+
+        if (cart.length === 0) {
+            emptyMsg.style.display = 'block';
+            summary.style.display = 'none';
+        } else {
+            emptyMsg.style.display = 'none';
+            summary.style.display = 'block';
+
+            cart.forEach(item => {
+                const itemEl = document.createElement('div');
+                itemEl.style.display = 'flex';
+                itemEl.style.justifyContent = 'space-between';
+                itemEl.style.alignItems = 'center';
+                itemEl.style.padding = '1.5rem';
+                itemEl.style.background = 'var(--card-bg)';
+                itemEl.style.border = 'var(--border)';
+                itemEl.style.borderRadius = '15px';
+                itemEl.style.marginBottom = '1rem';
+                itemEl.style.boxShadow = 'var(--shadow)';
+
+                itemEl.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 1.5rem;">
+                        <div style="width: 60px; height: 60px; background: var(--bg-secondary); border-radius: 10px; display: flex; align-items: center; justify-content: center;">
+                            <i class="fas fa-coffee" style="color: var(--accent-color);"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin-bottom: 0.2rem;">${item.name}</h4>
+                            <p style="color: var(--accent-color); font-weight: 600;">₹${item.price.toFixed(2)}</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 1.5rem;">
+                        <div style="display: flex; align-items: center; gap: 0.8rem; border: var(--border); border-radius: 20px; padding: 0.3rem 0.8rem;">
+                            <i class="fas fa-minus" style="cursor: pointer; font-size: 0.8rem;" onclick="window.cartManager.updateQuantity('${item.id}', -1)"></i>
+                            <span style="font-weight: 600;">${item.quantity}</span>
+                            <i class="fas fa-plus" style="cursor: pointer; font-size: 0.8rem;" onclick="window.cartManager.updateQuantity('${item.id}', 1)"></i>
+                        </div>
+                        <i class="fas fa-trash" style="color: #ff7675; cursor: pointer;" onclick="window.cartManager.removeItem('${item.id}')"></i>
+                    </div>
+                `;
+                itemsContainer.appendChild(itemEl);
+            });
+
+            totalPrice.textContent = `₹${window.cartManager.getTotal().toFixed(2)}`;
+        }
+    });
+</script>
+{% endblock %}

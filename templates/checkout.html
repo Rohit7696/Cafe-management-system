@@ -1,0 +1,233 @@
+{% extends "base.html" %}
+
+{% block title %}Complete Order | Luxe Cafe{% endblock %}
+
+{% block content %}
+<section class="container" style="margin-top: 5rem; min-height: 80vh;">
+    <div class="section-title reveal">
+        <h2 style="font-size: 3rem; background: linear-gradient(135deg, var(--accent-color), #f39c12); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Complete Order</h2>
+        <p style="font-size: 1.1rem;">Enter customer details and pick a payment method for counter checkout.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1200px; margin: 0 auto; align-items: start;">
+        
+        <!-- Left Side: Order Details & Inputs -->
+        <div class="reveal" style="background: var(--card-bg); border-radius: 20px; padding: 3rem; box-shadow: var(--shadow); border: var(--border);">
+            <h3 style="margin-bottom: 2rem; font-size: 1.8rem;">Order Summary & Info</h3>
+            
+            <div id="checkout-summary-items" style="margin-bottom: 1.5rem; border-bottom: var(--border); padding-bottom: 1.5rem;">
+                <!-- JS injets cart items -->
+            </div>
+            
+            <div style="margin-bottom: 2.5rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 1.1rem; color: var(--text-secondary);">
+                    <span>Subtotal</span>
+                    <span id="checkout-subtotal">₹0.00</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 1.1rem; color: var(--text-secondary);">
+                    <span>GST (5%)</span>
+                    <span id="checkout-gst">₹0.00</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; font-size: 1.1rem; color: var(--text-secondary);">
+                    <span>Tip</span>
+                    <span id="checkout-tip-amt">₹0.00</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; margin-top: 1rem; font-weight: 800; font-size: 1.6rem; color: var(--text-primary);">
+                    <span>Total</span>
+                    <span id="checkout-total">₹0.00</span>
+                </div>
+            </div>
+
+            <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; margin-bottom: 0.8rem; font-weight: 600; color: var(--text-secondary); font-size: 1.1rem;">Customer Name</label>
+                <input type="text" id="cust-name" required placeholder="e.g. Jane Doe" style="width: 100%; padding: 1.2rem; border: var(--border); border-radius: 12px; background: var(--bg-secondary); color: var(--text-primary); font-size: 1.1rem; outline: none; transition: var(--transition);">
+            </div>
+            
+            <div style="margin-bottom: 3rem;">
+                <label style="display: block; margin-bottom: 0.8rem; font-weight: 600; color: var(--text-secondary); font-size: 1.1rem;">Mobile Number</label>
+                <input type="tel" id="cust-mobile" required placeholder="+91 98765 43210" style="width: 100%; padding: 1.2rem; border: var(--border); border-radius: 12px; background: var(--bg-secondary); color: var(--text-primary); font-size: 1.1rem; outline: none; transition: var(--transition);">
+            </div>
+
+            <h3 style="margin-bottom: 1.5rem; font-size: 1.8rem;">Add a Tip <span style="font-size: 1rem; color: var(--text-secondary); font-weight: 400;">(Optional)</span></h3>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1rem;">
+                <button class="tip-btn active" data-tip="0" style="padding: 1.2rem 0; border-radius: 12px; border: var(--border); background: var(--accent-color); color: white; cursor: pointer; font-weight: 700; font-size: 1.1rem; transition: var(--transition);">No Tip</button>
+                <button class="tip-btn" data-tip="10" style="padding: 1.2rem 0; border-radius: 12px; border: var(--border); background: var(--bg-secondary); color: var(--text-primary); cursor: pointer; font-weight: 700; font-size: 1.1rem; transition: var(--transition);">10%</button>
+                <button class="tip-btn" data-tip="15" style="padding: 1.2rem 0; border-radius: 12px; border: var(--border); background: var(--bg-secondary); color: var(--text-primary); cursor: pointer; font-weight: 700; font-size: 1.1rem; transition: var(--transition);">15%</button>
+                <button class="tip-btn" data-tip="20" style="padding: 1.2rem 0; border-radius: 12px; border: var(--border); background: var(--bg-secondary); color: var(--text-primary); cursor: pointer; font-weight: 700; font-size: 1.1rem; transition: var(--transition);">20%</button>
+            </div>
+        </div>
+
+        <!-- Right Side: Payment Methods -->
+        <div class="reveal" style="transition-delay: 0.2s;">
+            <h3 style="margin-bottom: 2rem; font-size: 1.8rem;">Payment Method</h3>
+            
+            <div class="payment-option selected" data-method="QR" style="background: var(--card-bg); border: 2px solid var(--accent-color); border-radius: 20px; padding: 2rem; margin-bottom: 1.5rem; cursor: pointer; display: flex; align-items: center; gap: 1.5rem; box-shadow: var(--shadow); transition: var(--transition);">
+                <div class="icon-box" style="width: 70px; height: 70px; background: rgba(230, 126, 34, 0.1); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--accent-color); transition: var(--transition);">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+                <div>
+                    <h4 style="font-size: 1.4rem; margin-bottom: 0.4rem;">QR / UPI Payment</h4>
+                    <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.4;">Customer scans QR code generated securely on our dynamic counter display.</p>
+                </div>
+                <div class="check-icon" style="margin-left: auto; color: var(--accent-color); font-size: 1.8rem; transition: var(--transition);">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+            </div>
+
+            <div class="payment-option" data-method="Card" style="background: var(--card-bg); border: 2px solid transparent; border-radius: 20px; padding: 2rem; margin-bottom: 3rem; cursor: pointer; display: flex; align-items: center; gap: 1.5rem; box-shadow: var(--shadow); transition: var(--transition);">
+                <div class="icon-box" style="width: 70px; height: 70px; background: var(--bg-secondary); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--text-secondary); transition: var(--transition);">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <div>
+                    <h4 style="font-size: 1.4rem; margin-bottom: 0.4rem;">Card / POS Machine</h4>
+                    <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.4;">Customer taps or inserts their debit/credit card directly via counter machine.</p>
+                </div>
+                <div class="check-icon" style="margin-left: auto; color: transparent; font-size: 1.8rem; transition: var(--transition);">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+            </div>
+
+            <button id="proceed-btn" style="width: 100%; padding: 1.5rem; background: linear-gradient(135deg, var(--accent-color), var(--accent-hover)); color: white; border: none; border-radius: 15px; font-size: 1.4rem; font-weight: 700; cursor: pointer; box-shadow: 0 10px 25px rgba(211, 84, 0, 0.35); transition: transform 0.3s ease, box-shadow 0.3s ease;">
+                Proceed to Pay <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+            </button>
+        </div>
+
+    </div>
+</section>
+
+<!-- QR Modal -->
+<div id="qr-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
+    <div style="background: var(--card-bg); padding: 3rem; border-radius: 24px; text-align: center; max-width: 400px; width: 90%; position: relative;">
+        <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Scan to Pay</h3>
+        <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.1rem;">Scan this code using any UPI app</p>
+        
+        <div style="position: relative; width: 250px; height: 250px; margin: 0 auto 2rem; background: white; padding: 1rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=LuxeCafePayment" alt="QR Code" style="width: 100%; height: 100%;">
+            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 8px; border-radius: 50%;">
+                <h4 style="font-weight: 900; color: var(--accent-color); font-size: 1.2rem; letter-spacing: -1px; margin: 0;">LUXE</h4>
+            </div>
+        </div>
+
+        <h2 id="modal-total" style="font-size: 2.2rem; margin-bottom: 2rem; color: var(--accent-color);">₹0.00</h2>
+        <button id="confirm-payment-btn" style="width: 100%; padding: 1rem; background: var(--text-primary); color: var(--bg-primary); border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 700; cursor: pointer;">Simulate Successful Payment</button>
+        <p id="close-modal" style="margin-top: 1rem; color: var(--text-secondary); cursor: pointer; text-decoration: underline;">Cancel</p>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const cart = window.cartManager.getCart();
+        if (cart.length === 0) {
+            window.location.href = '/cart';
+            return;
+        }
+
+        // Calculation State
+        let subtotal = window.cartManager.getTotal();
+        let gst = subtotal * 0.05;
+        let tipPercent = 0;
+        let selectedPayment = 'QR';
+
+        const updateTotals = () => {
+            let tipAmt = subtotal * (tipPercent / 100);
+            let total = subtotal + gst + tipAmt;
+
+            document.getElementById('checkout-subtotal').textContent = `₹${subtotal.toFixed(2)}`;
+            document.getElementById('checkout-gst').textContent = `₹${gst.toFixed(2)}`;
+            document.getElementById('checkout-tip-amt').textContent = `₹${tipAmt.toFixed(2)}`;
+            document.getElementById('checkout-total').textContent = `₹${total.toFixed(2)}`;
+            document.getElementById('modal-total').textContent = `₹${total.toFixed(2)}`;
+            
+            // Save to localStorage for receipt
+            localStorage.setItem('recentOrder', JSON.stringify({
+                items: cart,
+                subtotal, gst, tip: tipAmt, total, method: selectedPayment
+            }));
+        };
+
+        // Render Summary Items
+        const summaryItemsContainer = document.getElementById('checkout-summary-items');
+        cart.forEach(item => {
+            const el = document.createElement('div');
+            el.style.display = 'flex';
+            el.style.justifyContent = 'space-between';
+            el.style.marginBottom = '0.8rem';
+            el.style.fontSize = '1.1rem';
+            el.innerHTML = `<span><span style="font-weight:700;">${item.quantity}x</span> ${item.name}</span> <span style="font-weight:600;">₹${(item.price * item.quantity).toFixed(2)}</span>`;
+            summaryItemsContainer.appendChild(el);
+        });
+
+        updateTotals();
+
+        // Tip Selector
+        const tipBtns = document.querySelectorAll('.tip-btn');
+        tipBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tipBtns.forEach(b => {
+                    b.style.background = 'var(--bg-secondary)';
+                    b.style.color = 'var(--text-primary)';
+                    b.classList.remove('active');
+                });
+                btn.style.background = 'var(--accent-color)';
+                btn.style.color = 'white';
+                btn.classList.add('active');
+                tipPercent = parseInt(btn.dataset.tip);
+                updateTotals();
+            });
+        });
+
+        // Payment Method Selector
+        const paymentOptions = document.querySelectorAll('.payment-option');
+        paymentOptions.forEach(opt => {
+            opt.addEventListener('click', () => {
+                paymentOptions.forEach(o => {
+                    o.style.borderColor = 'transparent';
+                    o.classList.remove('selected');
+                    o.querySelector('.icon-box').style.background = 'var(--bg-secondary)';
+                    o.querySelector('.icon-box').style.color = 'var(--text-secondary)';
+                    o.querySelector('.check-icon').style.color = 'transparent';
+                });
+                opt.style.borderColor = 'var(--accent-color)';
+                opt.classList.add('selected');
+                opt.querySelector('.icon-box').style.background = 'rgba(230, 126, 34, 0.1)';
+                opt.querySelector('.icon-box').style.color = 'var(--accent-color)';
+                opt.querySelector('.check-icon').style.color = 'var(--accent-color)';
+                selectedPayment = opt.dataset.method;
+                updateTotals();
+            });
+        });
+
+        // Proceed to Pay
+        const modal = document.getElementById('qr-modal');
+        document.getElementById('proceed-btn').addEventListener('click', () => {
+            const name = document.getElementById('cust-name').value;
+            const mobile = document.getElementById('cust-mobile').value;
+            if(!name || !mobile) {
+                alert("Please enter Customer Name and Mobile Number!");
+                return;
+            }
+
+            if (selectedPayment === 'QR') {
+                modal.style.display = 'flex';
+            } else {
+                // Card payment simulation
+                let btn = document.getElementById('proceed-btn');
+                btn.innerHTML = '<i class="fas fa-circle-notch fa-spin"></i> Processing...';
+                setTimeout(() => {
+                    window.cartManager.clearCart();
+                    window.location.href = '/receipt';
+                }, 2000);
+            }
+        });
+
+        document.getElementById('close-modal').addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        document.getElementById('confirm-payment-btn').addEventListener('click', () => {
+            window.cartManager.clearCart();
+            window.location.href = '/receipt';
+        });
+    });
+</script>
+{% endblock %}

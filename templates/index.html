@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block title %}Home | Luxe Cafe{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content reveal">
+        <h1>Experience Coffee Like Never Before.</h1>
+        <p>Premium artisan coffee brewed with passion and served in a calm, minimal atmosphere. Discover our curated
+            selection of beans and pastries.</p>
+        <a href="/menu" class="cta-button">Explore Menu</a>
+    </div>
+</section>
+
+<!-- Our Story Section -->
+<section class="container reveal">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;">
+        <img src="{{ url_for('static', filename='images/Classic Cappuccino.jpg') }}" alt="Our Story"
+            style="width: 100%; border-radius: 20px; box-shadow: var(--shadow);" loading="lazy">
+        <div>
+            <h2 style="font-size: 2.5rem; margin-bottom: 1.5rem;">Our Story</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1.1rem;">Founded in the heart of
+                the city, Luxe Cafe began with a simple mission: to elevate the daily coffee ritual. We source only the
+                finest ethically grown beans from small-scale farmers across the globe.</p>
+            <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.1rem;">Every cup is a masterpiece,
+                crafted by our expert baristas who understand the science and soul behind a perfect brew.</p>
+            <a href="/menu"
+                style="color: var(--accent-color); font-weight: 700; border-bottom: 2px solid var(--accent-color);">Learn
+                More About Our Beans</a>
+        </div>
+    </div>
+</section>
+
+<!-- Signature Products -->
+<section class="container reveal" style="background: var(--bg-secondary);">
+    <div class="section-title">
+        <h2>Signature Series</h2>
+        <p>Our most exclusive blends, crafted for the true connoisseur.</p>
+    </div>
+    <div class="menu-grid">
+        <div class="card reveal"
+            style="background: var(--card-bg); border: var(--border); border-radius: 15px; padding: 1.5rem; transition: var(--transition); box-shadow: var(--shadow);">
+            <img src="{{ url_for('static', filename='images/Double Espresso.jpg') }}" alt="Velvet Espresso"
+                style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;"
+                loading="lazy">
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Velvet Espresso</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Signature dark roast with hints of cocoa and
+                toasted hazelnut.</p>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: 700; color: var(--accent-color); font-size: 1.4rem;">₹360</span>
+                <span style="font-size: 0.9rem; font-weight: 600;"><i class="fas fa-star" style="color: gold;"></i>
+                    4.9</span>
+            </div>
+        </div>
+        <div class="card reveal"
+            style="background: var(--card-bg); border: var(--border); border-radius: 15px; padding: 1.5rem; transition: var(--transition); box-shadow: var(--shadow);">
+            <img src="{{ url_for('static', filename='images/Artisan Flat White.jpg') }}" alt="Artisan Latte"
+                style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;"
+                loading="lazy">
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Artisan Latte</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Silky smooth textured milk poured over our
+                premium house blend.</p>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: 700; color: var(--accent-color); font-size: 1.4rem;">₹420</span>
+                <span style="font-size: 0.9rem; font-weight: 600;"><i class="fas fa-star" style="color: gold;"></i>
+                    4.8</span>
+            </div>
+        </div>
+        <div class="card reveal"
+            style="background: var(--card-bg); border: var(--border); border-radius: 15px; padding: 1.5rem; transition: var(--transition); box-shadow: var(--shadow);">
+            <img src="{{ url_for('static', filename='images/Ethiopian Cold Brew.jpg') }}" alt="Midnight Cold Brew"
+                style="width: 100%; height: 250px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;"
+                loading="lazy">
+            <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Ethiopian Cold Brew</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Refreshing floral and citrus notes, steeped
+                for 12 hours.</p>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: 700; color: var(--accent-color); font-size: 1.4rem;">₹440</span>
+                <span style="font-size: 0.9rem; font-weight: 600;"><i class="fas fa-star" style="color: gold;"></i>
+                    4.9</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="container reveal">
+    <div class="section-title">
+        <h2>Why Choose Luxe Cafe?</h2>
+        <p>We pride ourselves on excellence in every detail.</p>
+    </div>
+    <div class="feature-grid">
+        <div class="feature-item reveal">
+            <i class="fas fa-leaf"></i>
+            <h3>Ethically Sourced</h3>
+            <p style="color: var(--text-secondary);">Direct-trade beans ensuring fair compensation for farmers.</p>
+        </div>
+        <div class="feature-item reveal" style="transition-delay: 0.2s;">
+            <i class="fas fa-fire"></i>
+            <h3>Master Roasting</h3>
+            <p style="color: var(--text-secondary);">Small-batch roasting for the peak flavor profile of every bean.</p>
+        </div>
+        <div class="feature-item reveal" style="transition-delay: 0.4s;">
+            <i class="fas fa-users"></i>
+            <h3>Expert Baristas</h3>
+            <p style="color: var(--text-secondary);">Passionate professionals trained in global coffee standards.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonials -->
+<section class="container reveal"
+    style="background: var(--bg-secondary); border-radius: 0 100px 0 100px; margin: 2rem 5%;">
+    <div class="section-title">
+        <h2>What Our Guests Say</h2>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        <div class="card reveal" style="padding: 2.5rem; text-align: center;">
+            <div style="margin-bottom: 1.5rem; color: #f1c40f;">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                    class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p style="font-style: italic; margin-bottom: 1.5rem;">"The atmosphere is incredibly calming, and the
+                Midnight Cold Brew is easily the best I've ever had."</p>
+            <h4 style="font-weight: 700;">- Sarah Jameson</h4>
+        </div>
+        <div class="card reveal" style="padding: 2.5rem; text-align: center; transition-delay: 0.2s;">
+            <div style="margin-bottom: 1.5rem; color: #f1c40f;">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i
+                    class="fas fa-star"></i><i class="fas fa-star"></i>
+            </div>
+            <p style="font-style: italic; margin-bottom: 1.5rem;">"A professional space that feels like luxury. Perfect
+                for deep work and amazing pastries."</p>
+            <h4 style="font-weight: 700;">- David Chen</h4>
+        </div>
+    </div>
+</section>
+
+<section class="container">
+    <div class="section-title">
+        <h2>Our Favorites</h2>
+        <p>Hand-picked selections that our customers love.</p>
+    </div>
+    <div class="menu-grid"
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+        <div class="card"
+            style="background: var(--card-bg); border: var(--border); border-radius: 15px; padding: 1.5rem; transition: var(--transition); box-shadow: var(--shadow);">
+            <img src="{{ url_for('static', filename='images/Double Espresso.jpg') }}" alt="Espresso"
+                style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
+            <h3>Velvet Espresso</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Bold, smooth, and perfectly balanced.</p>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: 700; color: var(--accent-color); font-size: 1.2rem;">₹360</span>
+                <span><i class="fas fa-star" style="color: gold;"></i> 4.9</span>
+            </div>
+        </div>
+        <div class="card"
+            style="background: var(--card-bg); border: var(--border); border-radius: 15px; padding: 1.5rem; transition: var(--transition); box-shadow: var(--shadow);">
+            <img src="{{ url_for('static', filename='images/Artisan Flat White.jpg') }}" alt="Latte"
+                style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
+            <h3>Artisan Latte</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Creamy texture with signature latte art.</p>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: 700; color: var(--accent-color); font-size: 1.2rem;">₹420</span>
+                <span><i class="fas fa-star" style="color: gold;"></i> 4.8</span>
+            </div>
+        </div>
+        <div class="card"
+            style="background: var(--card-bg); border: var(--border); border-radius: 15px; padding: 1.5rem; transition: var(--transition); box-shadow: var(--shadow);">
+            <img src="{{ url_for('static', filename='images/Midnight Cold Brew.jpg') }}" alt="Cold Brew"
+                style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
+            <h3>Midnight Cold Brew</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">12-hour steeped for maximum flavor.</p>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-weight: 700; color: var(--accent-color); font-size: 1.2rem;">₹400</span>
+                <span><i class="fas fa-star" style="color: gold;"></i> 4.7</span>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

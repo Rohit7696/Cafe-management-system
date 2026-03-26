@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}My Profile | Luxe Cafe{% endblock %}
+
+{% block content %}
+<section class="container" style="margin-top: 5rem;">
+    <div class="section-title reveal">
+        <h2 style="font-size: 3rem; background: linear-gradient(135deg, var(--accent-color), #f39c12); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">Complete Order</h2>
+        <p style="font-size: 1.1rem;">Enter customer details and pick a payment method for counter checkout.</p>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; max-width: 1100px; margin: 0 auto; align-items: start;">
+        
+        <!-- Left Side: Order Details & Inputs -->
+        <div class="reveal" style="background: var(--card-bg); border-radius: 20px; padding: 3rem; box-shadow: var(--shadow); border: var(--border);">
+            <h3 style="margin-bottom: 2rem; font-size: 1.8rem;">Customer Info</h3>
+            
+            <div style="margin-bottom: 1.5rem;">
+                <label style="display: block; margin-bottom: 0.8rem; font-weight: 600; color: var(--text-secondary); font-size: 1.1rem;">Customer Name</label>
+                <input type="text" placeholder="e.g. Jane Doe" style="width: 100%; padding: 1.2rem; border: var(--border); border-radius: 12px; background: var(--bg-secondary); color: var(--text-primary); font-size: 1.1rem; outline: none; transition: var(--transition);">
+            </div>
+            
+            <div style="margin-bottom: 3rem;">
+                <label style="display: block; margin-bottom: 0.8rem; font-weight: 600; color: var(--text-secondary); font-size: 1.1rem;">Mobile Number</label>
+                <input type="tel" placeholder="+91 98765 43210" style="width: 100%; padding: 1.2rem; border: var(--border); border-radius: 12px; background: var(--bg-secondary); color: var(--text-primary); font-size: 1.1rem; outline: none; transition: var(--transition);">
+            </div>
+
+            <h3 style="margin-bottom: 1.5rem; font-size: 1.8rem;">Add a Tip <span style="font-size: 1rem; color: var(--text-secondary); font-weight: 400;">(Optional)</span></h3>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 1rem;">
+                <button class="tip-btn active" style="padding: 1.2rem 0; border-radius: 12px; border: var(--border); background: var(--accent-color); color: white; cursor: pointer; font-weight: 700; font-size: 1.1rem; transition: var(--transition);">No Tip</button>
+                <button class="tip-btn" style="padding: 1.2rem 0; border-radius: 12px; border: var(--border); background: var(--bg-secondary); color: var(--text-primary); cursor: pointer; font-weight: 700; font-size: 1.1rem; transition: var(--transition);">10%</button>
+                <button class="tip-btn" style="padding: 1.2rem 0; border-radius: 12px; border: var(--border); background: var(--bg-secondary); color: var(--text-primary); cursor: pointer; font-weight: 700; font-size: 1.1rem; transition: var(--transition);">15%</button>
+                <button class="tip-btn" style="padding: 1.2rem 0; border-radius: 12px; border: var(--border); background: var(--bg-secondary); color: var(--text-primary); cursor: pointer; font-weight: 700; font-size: 1.1rem; transition: var(--transition);">20%</button>
+            </div>
+        </div>
+
+        <!-- Right Side: Payment Methods -->
+        <div class="reveal" style="transition-delay: 0.2s;">
+            <h3 style="margin-bottom: 2rem; font-size: 1.8rem;">Payment Method</h3>
+            
+            <div class="payment-option selected" style="background: var(--card-bg); border: 2px solid var(--accent-color); border-radius: 20px; padding: 2rem; margin-bottom: 1.5rem; cursor: pointer; display: flex; align-items: center; gap: 1.5rem; box-shadow: var(--shadow); transition: var(--transition);">
+                <div class="icon-box" style="width: 70px; height: 70px; background: rgba(230, 126, 34, 0.1); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--accent-color); transition: var(--transition);">
+                    <i class="fas fa-qrcode"></i>
+                </div>
+                <div>
+                    <h4 style="font-size: 1.4rem; margin-bottom: 0.4rem;">QR / UPI Payment</h4>
+                    <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.4;">Customer scans QR code generated securely on our dynamic counter display.</p>
+                </div>
+                <div class="check-icon" style="margin-left: auto; color: var(--accent-color); font-size: 1.8rem; transition: var(--transition);">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+            </div>
+
+            <div class="payment-option" style="background: var(--card-bg); border: 2px solid transparent; border-radius: 20px; padding: 2rem; margin-bottom: 3rem; cursor: pointer; display: flex; align-items: center; gap: 1.5rem; box-shadow: var(--shadow); transition: var(--transition);">
+                <div class="icon-box" style="width: 70px; height: 70px; background: var(--bg-secondary); border-radius: 18px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: var(--text-secondary); transition: var(--transition);">
+                    <i class="fas fa-credit-card"></i>
+                </div>
+                <div>
+                    <h4 style="font-size: 1.4rem; margin-bottom: 0.4rem;">Card / POS Machine</h4>
+                    <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.4;">Customer taps or inserts their debit/credit card directly via counter machine.</p>
+                </div>
+                <div class="check-icon" style="margin-left: auto; color: transparent; font-size: 1.8rem; transition: var(--transition);">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+            </div>
+
+            <button style="width: 100%; padding: 1.5rem; background: linear-gradient(135deg, var(--accent-color), var(--accent-hover)); color: white; border: none; border-radius: 15px; font-size: 1.4rem; font-weight: 700; cursor: pointer; box-shadow: 0 10px 25px rgba(211, 84, 0, 0.35); transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 15px 35px rgba(211, 84, 0, 0.4)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 10px 25px rgba(211, 84, 0, 0.35)';">
+                Proceed to Pay <i class="fas fa-arrow-right" style="margin-left: 10px;"></i>
+            </button>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Payment Option selector logic
+        const paymentOptions = document.querySelectorAll('.payment-option');
+        paymentOptions.forEach(opt => {
+            opt.addEventListener('click', () => {
+                paymentOptions.forEach(o => {
+                    o.style.borderColor = 'transparent';
+                    o.classList.remove('selected');
+                    o.querySelector('.icon-box').style.background = 'var(--bg-secondary)';
+                    o.querySelector('.icon-box').style.color = 'var(--text-secondary)';
+                    o.querySelector('.check-icon').style.color = 'transparent';
+                });
+                opt.style.borderColor = 'var(--accent-color)';
+                opt.classList.add('selected');
+                opt.querySelector('.icon-box').style.background = 'rgba(230, 126, 34, 0.1)';
+                opt.querySelector('.icon-box').style.color = 'var(--accent-color)';
+                opt.querySelector('.check-icon').style.color = 'var(--accent-color)';
+            });
+        });
+
+        // Tip button logic
+        const tipBtns = document.querySelectorAll('.tip-btn');
+        tipBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tipBtns.forEach(b => {
+                    b.style.background = 'var(--bg-secondary)';
+                    b.style.color = 'var(--text-primary)';
+                    b.classList.remove('active');
+                });
+                btn.style.background = 'var(--accent-color)';
+                btn.style.color = 'white';
+                btn.classList.add('active');
+            });
+        });
+
+        // Input outlines
+        const inputs = document.querySelectorAll('input');
+        inputs.forEach(input => {
+            input.addEventListener('focus', () => {
+                input.style.border = '1px solid var(--accent-color)';
+                input.style.boxShadow = '0 0 0 4px rgba(211, 84, 0, 0.1)';
+            });
+            input.addEventListener('blur', () => {
+                input.style.border = 'var(--border)';
+                input.style.boxShadow = 'none';
+            });
+        });
+    });
+</script>
+{% endblock %}
